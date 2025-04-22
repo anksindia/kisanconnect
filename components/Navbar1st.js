@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Menu, X } from 'lucide-react'; 
+import { Menu, X } from 'lucide-react';
 const Navbar1st = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -12,7 +12,14 @@ const Navbar1st = () => {
       <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         {/* Logo */}
         <div className="flex items-center cursor-pointer gap-2">
-          <Image src="/kisanconnect.png" alt="KisanConnect Logo" width={40} height={40} />
+          <Image
+            src="/kisanconnect.png"
+            alt="KisanConnect Logo"
+            width={40}
+            height={40}
+            style={{ width: 'auto', height: 'auto' }}
+          />
+
           <span className="text-xl font-bold text-green-700">KisanConnect</span>
         </div>
 
