@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
-import { Mail, MapPin, Phone, Facebook, Instagram, Twitter } from 'lucide-react';
+import { FaXTwitter } from 'react-icons/fa6';
+import { Mail, MapPin, Phone, Github, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -11,7 +12,7 @@ const Footer = () => {
         <div>
           <h2 className="text-2xl font-bold mb-3">KisanConnect</h2>
           <p className="text-sm">
-          Connecting you to the roots of freshness and fairness.
+            Connecting you to the roots of freshness and fairness.
           </p>
         </div>
 
@@ -46,17 +47,15 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
           <div className="flex gap-4 mt-2">
-            <Facebook className="hover:text-amber-300 cursor-pointer" />
+            <Github className="hover:text-amber-300 cursor-pointer" />
             <Instagram className="hover:text-amber-300 cursor-pointer" />
-            <Twitter className="hover:text-amber-300 cursor-pointer" />
+            <FaXTwitter className="hover:text-amber-300 cursor-pointer" />
           </div>
         </div>
-      </div>
+      </div> 
 
-      {/* Divider */}
       <hr className="my-6 border-white/20" />
 
-      {/* Bottom Note */}
       <div className="text-center text-sm">
         © {new Date().getFullYear()} KisanConnect. All rights reserved.
       </div>

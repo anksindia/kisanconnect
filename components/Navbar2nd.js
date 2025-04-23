@@ -2,17 +2,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
-import Button from './Button';
-import Link from 'next/link';
+import { Menu, X, ShoppingCart, UserCircle } from 'lucide-react';
 
-const Navbar1st = () => {
+const Navbar2nd = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   const toggleMenu = () => setIsOpen(!isOpen);
-
-  const hideLogin = pathname === '/login' || pathname === '/register';
 
   return (
     <header className="shadow-md bg-white sticky top-0 z-50">
@@ -32,13 +28,14 @@ const Navbar1st = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-6">
           <li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">
-            Continue as Seller
+            Orders
           </li>
-          {!hideLogin && (
-            <li>
-              <Link href="/login"><Button button="Login / Sign Up"/></Link>
-            </li>
-          )}
+          <li className="text-gray-700 hover:text-green-700 cursor-pointer">
+            <ShoppingCart size={22} />
+          </li>
+          <li className="text-gray-700 hover:text-green-700 cursor-pointer">
+            <UserCircle size={22} />
+          </li>
         </ul>
 
         {/* Mobile Menu Icon */}
@@ -52,13 +49,14 @@ const Navbar1st = () => {
         <div className="md:hidden px-6 pb-4">
           <ul className="flex flex-col gap-4">
             <li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">
-              Continue as Seller
+              Orders
             </li>
-            {!hideLogin && (
-              <li>
-                <Link href="/login"><Button button="Login / Sign Up"/></Link>
-              </li>
-            )}
+            <li className="flex items-center gap-2 text-gray-700 hover:text-green-700 cursor-pointer">
+              <ShoppingCart size={20} /> Cart
+            </li>
+            <li className="flex items-center gap-2 text-gray-700 hover:text-green-700 cursor-pointer">
+              <UserCircle size={20} /> Account
+            </li>
           </ul>
         </div>
       )}
@@ -66,4 +64,4 @@ const Navbar1st = () => {
   );
 };
 
-export default Navbar1st;
+export default Navbar2nd;
