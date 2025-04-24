@@ -19,7 +19,7 @@ const Navbar = () => {
           <p className='text-white px-4 py-6 font-semibold text-2xl'>
             Discover and order fresh produce directly from local farmers
           </p>
-          <Link href="/marketplace">
+          <Link href={"/marketplace"}>
             <button className="mx-auto bg-amber-500 hover:bg-amber-600 font-semibold text-white px-6 py-3 rounded-md shadow-lg transition duration-300">
               Explore Products
             </button>

@@ -31,12 +31,12 @@ const Navbar1st = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-6">
-          <li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">
+          <Link href={"register"}><li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">
             Continue as Seller
-          </li>
+          </li></Link>
           {!hideLogin && (
             <li>
-              <Link href="/login"><Button button="Login / Sign Up"/></Link>
+              <Link href={"/login"}><Button button="Login / Sign Up"/></Link>
             </li>
           )}
         </ul>
@@ -51,12 +51,12 @@ const Navbar1st = () => {
       {isOpen && (
         <div className="md:hidden px-6 pb-4">
           <ul className="flex flex-col gap-4">
-            <li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">
+          <Link href={"register"}><li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">
               Continue as Seller
-            </li>
+            </li></Link>
             {!hideLogin && (
               <li>
-                <Link href="/login"><Button button="Login / Sign Up"/></Link>
+                <Link href={"/login"}><Button button="Login / Sign Up"/></Link>
               </li>
             )}
           </ul>
