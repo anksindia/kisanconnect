@@ -30,7 +30,7 @@ const Marketplace = () => {
 
 
       {/* produce */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-3 gap-y-5 px-2 place-items-center max-w-7xl mx-auto my-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-3 gap-y-5 px-2 place-items-center max-w-6xl mx-auto my-5">
         <Details />
         <Details />
         <Details />

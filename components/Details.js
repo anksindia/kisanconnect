@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from './Button'
+import Image from 'next/image'
 
 const Details = () => {
   return (
@@ -8,7 +9,7 @@ const Details = () => {
 
         {/* Image */}
         <div className="w-full h-32 mb-2 rounded-md overflow-hidden">
-          <img
+          <Image height={100} width={100}
             src="/maduwa.webp"
             alt="maduwa"
             className="w-full h-full object-cover"
@@ -21,7 +22,7 @@ const Details = () => {
           <div className="text-gray-600">Farmer: <span className="text-gray-700 font-medium">ayush</span></div>
           <div className="text-green-700 font-semibold">Price: ₹50</div>
           <div className="text-gray-600">Quantity: <span className="text-gray-700">2kg</span></div>
-          <Button button="add to cart" />
+          <Button button="Add to cart" />
         </div>
       </div>
 
