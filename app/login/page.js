@@ -1,5 +1,7 @@
-import Navbar1st from '@/components/Navbar1st';
+"use client"
+import Navbar1st from '@/components/Navbar';
 import React from 'react';
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const Login = () => {
   return (
@@ -14,7 +16,7 @@ const Login = () => {
 
           <div className="space-y-4">
             {/* GitHub */}
-            <button className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-2 text-gray-700 hover:bg-gray-100 transition">
+            <button onClick={()=>signIn("github")} className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-2 text-gray-700 hover:bg-gray-100 transition">
               <img
                 src="https://www.svgrepo.com/show/512317/github-142.svg"
                 alt="GitHub"
@@ -55,7 +57,3 @@ const Login = () => {
 
 export default Login;
 
-export const metadata = {
-  title: "KisanConnect-login",
-  description: "KisanConnect login page.",
-};

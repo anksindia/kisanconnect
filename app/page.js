@@ -1,12 +1,12 @@
 import React from 'react';
-import Navbar1st from '@/components/Navbar1st';
+import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 
 
-const Navbar = () => {
+const page = () => {
   return (
     <>
-      <Navbar1st />
+      <Navbar />
       <div className="relative bg-[url('/img2.webp')] bg-cover bg-center h-[89vh] flex flex-col items-center justify-center">
         {/* Overlay */}
         <div className="absolute inset-0 bg-black opacity-20"></div>
@@ -78,4 +78,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default page;

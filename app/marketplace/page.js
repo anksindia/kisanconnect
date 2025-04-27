@@ -1,13 +1,13 @@
 'use client';
 import Details from '@/components/Details';
-import Navbar2nd from '@/components/Navbar2nd';
+import Navbar from '@/components/Navbar';
 import SearchBar from '@/components/SearchBar';
 import React from 'react';
 
 const Marketplace = () => {
   return (
     <>
-      <Navbar2nd />
+      <Navbar />
 
       {/* Section for the Marketplace Heading */}
       <div className="relative bg-[url('/img3.webp')] bg-cover bg-center py-12 z-10">
