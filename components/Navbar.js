@@ -18,8 +18,8 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
 
-  const hideLoginButton = pathname === '/login' || pathname === '/register';
-  const hideAccountAndOrders = pathname === '/login' || pathname === '/' || pathname === '/seller' || pathname === '/register';
+  const hideLoginButton = pathname === '/login' || pathname === '/BecomeSeller';
+  const hideAccountAndOrders = pathname === '/login' || pathname === '/' || pathname === '/seller' || pathname === '/BecomeSeller';
 
   useEffect(() => {
     if (session && pathname === '/login') {
@@ -44,7 +44,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-6">
-          {!hideAccountAndOrders && (
+          {session && !hideAccountAndOrders && (
             <>
               <li className="text-gray-700 hover:text-green-700 cursor-pointer">
                 <ShoppingCart size={22} />
@@ -53,7 +53,7 @@ const Navbar = () => {
                 <UserCircle size={22} />
                 {isUserMenuOpen && (
                   <ul className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-md py-2">
-                    <Link href="/register">
+                    <Link href="/BecomeSeller">
                       <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Account</li>
                     </Link>
                     <Link href="/orders">
@@ -72,7 +72,7 @@ const Navbar = () => {
           )}
 
           {/* Continue as Seller always visible */}
-          <Link href="/register">
+          <Link href="/BecomeSeller">
             <li className="text-green-700 font-semibold hover:text-gray-700 cursor-pointer">
               Continue as Seller
             </li>
@@ -105,7 +105,7 @@ const Navbar = () => {
         <div className="md:hidden px-6 pb-4">
           <ul className="flex flex-col gap-4">
             {/* Continue as Seller always visible */}
-            <Link href="/register">
+            <Link href="/BecomeSeller">
               <li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">
                 Continue as Seller
               </li>
@@ -118,7 +118,7 @@ const Navbar = () => {
                     Orders
                   </li>
                 </Link>
-                <Link href="/register">
+                <Link href="/BecomeSeller">
                   <li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">
                     Account
                   </li>
