@@ -9,7 +9,7 @@ const BecomeSeller = () => {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative bg-cover bg-center h-[80vh] text-white py-32" style={{ backgroundImage: "url('/img.webp')" }}>
-        <div className="absolute inset-0 bg-green-950 opacity-60"></div> {/* Stronger dark overlay */}
+        <div className="absolute inset-0 bg-green-950 opacity-60"></div>
         <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
           <div className="max-w-xl z-10">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">Start Selling on KisanConnect</h1>
@@ -23,7 +23,7 @@ const BecomeSeller = () => {
 
 
       {/* Steps Section */}
-      <section className="relative py-20 bg-gray-50">
+      <section className="relative py-20">
         <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
 
         <div className="max-w-7xl mx-auto px-6 text-center">
@@ -61,7 +61,7 @@ const BecomeSeller = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-green-800 mb-4">Seller Benefits</h2>
-    
+
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -115,28 +115,28 @@ const BecomeSeller = () => {
       </section>
 
 
-     {/* Call to Action */}
-<section className="py-20 bg-yellow-400">
-  <div className="max-w-4xl mx-auto px-6 text-center">
-    <div className="p-8 md:p-10 rounded-xl">
-      <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-4">Ready to Grow Your Farming Business?</h2>
-      <p className="text-lg text-green-800 mb-8 max-w-2xl mx-auto">
-        Join thousands of farmers who are selling directly to buyers and getting better prices
-      </p>
-      <div className="flex justify-center">
-        <Link href="/register">
-          <button className="bg-green-700 hover:bg-green-800 text-white font-semibold py-3 px-10 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
-            Start Selling Today
-          </button>
-        </Link>
-      </div>
-      <div className="mt-6 flex justify-center items-center space-x-2 text-green-900">
-        <FaUsers className="text-lg" />
-        <span className="text-sm font-medium">10,000+ farmers already selling</span>
-      </div>
-    </div>
-  </div>
-</section>
+      {/* Call to Action */}
+      <section className="py-20 bg-yellow-400">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="p-8 md:p-10 rounded-xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-4">Ready to Grow Your Farming Business?</h2>
+            <p className="text-lg text-green-800 mb-8 max-w-2xl mx-auto">
+              Join thousands of farmers who are selling directly to buyers and getting better prices
+            </p>
+            <div className="flex justify-center">
+              <Link href="/register">
+                <button className="bg-green-700 hover:bg-green-800 text-white font-semibold py-3 px-10 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
+                  Start Selling Today
+                </button>
+              </Link>
+            </div>
+            <div className="mt-6 flex justify-center items-center space-x-2 text-green-900">
+              <FaUsers className="text-lg" />
+              <span className="text-sm font-medium">10,000+ farmers already selling</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

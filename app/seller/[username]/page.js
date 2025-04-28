@@ -1,10 +1,10 @@
-import Navbar2nd from '@/components/Navbar2nd';
+import Navbar from '@/components/Navbar';
 import React from 'react';
 
 const SellerDashboard = () => {
   return (
     <>
-    <Navbar2nd/>
+    <Navbar/>
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
       <div className="mb-8">
