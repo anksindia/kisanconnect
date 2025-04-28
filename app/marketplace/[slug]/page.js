@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar2nd from '@/components/Navbar2nd';
+import Navbar from '@/components/Navbar';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import Details from '@/components/Details';
@@ -8,7 +8,7 @@ const Produce = ({ params }) => {
   const { slug } = params;
 
   return (<>
-    <Navbar2nd />
+    <Navbar />
 
     <div className="min-h-80  py-10 px-4">
       {/* Hero Section */}
