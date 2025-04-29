@@ -5,7 +5,7 @@ import { Mail, MapPin, Phone, Github, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-green-700 text-white pt-12 pb-6 px-6 sm:px-10 lg:px-24">
+    <footer className=" bg-green-700 text-white pt-12 pb-6 px-6 sm:px-10 lg:px-24">
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 sm:grid-cols-2 gap-8">
 
         {/* Brand Info */}
