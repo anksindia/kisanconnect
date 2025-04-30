@@ -21,15 +21,28 @@ const Register = () => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (step === 1) {
       setStep(2);
     } else if (step === 2) {
       setStep(3);
     } else {
-      console.log(data);
-      router.push('/seller-dashboard'); // after onboarding
+      const response = await fetch('/api/sellers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        alert(result.message || 'Something went wrong');
+        return;
+      }
+
+      router.push('/seller-dashboard');
     }
+
   };
 
   return (
@@ -99,6 +112,7 @@ const Register = () => {
                   className={`w-full rounded px-4 py-2 focus:outline-none block p-2.5 text-sm 
                     ${errors.address ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700' : 'border focus:border-green-500'}`}
                   placeholder="Enter your address"
+                  onBlur={(e) => e.target.value = e.target.value.trim()}
                 />
                 {errors.address && <p className="mt-2 text-sm text-red-600">{errors.address.message}</p>}
               </div>
@@ -146,6 +160,7 @@ const Register = () => {
                   className={`w-full rounded px-4 py-2 focus:outline-none block p-2.5 text-sm 
                     ${errors.gst ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700' : 'border focus:border-green-500'}`}
                   placeholder="Enter your GST number"
+                  onBlur={(e) => e.target.value = e.target.value.trim()}
                 />
                 {errors.gst && <p className="mt-2 text-sm text-red-600">{errors.gst.message}</p>}
               </div>
@@ -177,6 +192,18 @@ const Register = () => {
               >
                 Next
               </button>
+
+              {/* Login Link */}
+              <div className="mt-4 text-center">
+                <p className="text-sm text-gray-700">
+                  Already a seller?{' '}
+                  <a href="/seller-login" className="text-green-700 font-semibold hover:underline">
+                    Login
+                  </a>
+                </p>
+              </div>
+
+
             </>
           )}
 
