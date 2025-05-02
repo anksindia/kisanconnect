@@ -8,5 +8,5 @@ export async function POST(request) {
 
 
   const result = await collection.insertOne(body)
-  return Response.json({success:true, message: 'HEllo', result:result, error: false})
+  return Response.json({success:true, message: 'added', result:result, error: false})
 }
