@@ -1,6 +1,6 @@
 # 🧑‍🌾 KisanConnect
 
-![KisanConnect Banner](/banner.png)
+![KisanConnect Banner](/public/banner.png)
 
 > **“Taazgi ka safar, khet se aapke dar”**  
 > Discover and order fresh produce directly from local farmers.
@@ -38,7 +38,7 @@ KisanConnect is an initiative to empower local farmers by bridging the gap betwe
 
 ## 🖼️ Preview
 
-![App Preview](/banner.png)
+![App Preview](/public/banner.png)
 
 ---
 
