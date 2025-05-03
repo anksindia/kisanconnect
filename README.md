@@ -7,7 +7,7 @@
 
 ---
 
-## 🚧 Project Status: **Under Construction**
+## </> Project Status: **Under Development**
 
 KisanConnect is an initiative to empower local farmers by bridging the gap between them and end buyers. The platform allows farmers to register, list their organic produce, and connect with buyers directly—eliminating the middlemen and ensuring fair prices.
 
