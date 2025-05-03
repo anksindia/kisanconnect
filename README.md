@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🧑‍🌾 KisanConnect
 
-## Getting Started
+![KisanConnect Banner](/banner.png)
 
-First, run the development server:
+> **“Taazgi ka safar, khet se aapke dar”**  
+> Discover and order fresh produce directly from local farmers.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚧 Project Status: **Under Construction**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+KisanConnect is an initiative to empower local farmers by bridging the gap between them and end buyers. The platform allows farmers to register, list their organic produce, and connect with buyers directly—eliminating the middlemen and ensuring fair prices.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Features (Planned & In-Progress)
 
-To learn more about Next.js, take a look at the following resources:
+- ✅ Beautiful landing page with Hindi-English messaging
+- ✅ Seller login and registration system
+- ✅ Seller dashboard (in progress)
+- 🛒 Product listings and management (under development)
+- 📍 Buyer-side marketplace
+- 📦 Order placement & tracking
+- 📱 Mobile-responsive UI
+- 🔒 Secure backend with MongoDB & JWT
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌱 Tech Stack
 
-## Deploy on Vercel
+- **Frontend:** Next.js, Tailwind CSS
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB (Local & Atlas supported)
+- **Authentication:** JWT (Role-based - Seller/Buyer)
+- **Deployment:** Coming soon on Vercel/Railway
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🖼️ Preview
+
+![App Preview](/banner.png)
+
+---
+
+## 🤝 Contributing
+
+Want to contribute or have ideas to improve rural livelihoods via tech? Feel free to fork, open issues, or raise PRs.
+
+---
+
+## 📬 Contact
+
+**Ankit Suyal**  
+Email: [ankitsuyal.in@gmail.com]  
+Portfolio: [https://ankitsuyal.great-site.net] 
+
+---
+
+## 📌 License
+
+This project is under the MIT License.  
+Please do not use the visuals or branding without permission.
+
