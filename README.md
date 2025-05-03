@@ -28,11 +28,13 @@ KisanConnect is an initiative to empower local farmers by bridging the gap betwe
 
 ## 🌱 Tech Stack
 
-- **Frontend:** Next.js, Tailwind CSS
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB (Local & Atlas supported)
-- **Authentication:** JWT (Role-based - Seller/Buyer)
-- **Deployment:** Coming soon on Vercel/Railway
+## 🛠️ Tech Stack
+
+- **Frontend:** [Next.js](https://nextjs.org/) (React), [Tailwind CSS](https://tailwindcss.com/)
+- **Backend:** Next.js API Routes (built-in backend support)
+- **Database:** [MongoDB](https://www.mongodb.com/) (using Mongoose)
+- **Authentication:** [NextAuth.js](https://next-auth.js.org/) (JWT strategy, Role-based access: Seller/Buyer)
+- **Deployment:** Coming soon on Vercel
 
 ---
 
