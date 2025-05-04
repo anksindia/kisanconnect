@@ -9,7 +9,7 @@ const BecomeSeller = () => {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative bg-cover bg-center h-[80vh] text-white py-32" style={{ backgroundImage: "url('/img.webp')" }}>
-        <div className="absolute inset-0 bg-green-950 opacity-60"></div>
+        
         <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
           <div className="max-w-xl z-10">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">Start Selling on KisanConnect</h1>
@@ -116,7 +116,8 @@ const BecomeSeller = () => {
 
 
       {/* Call to Action */}
-      <section className="py-20 bg-yellow-400">
+      <section className="relative py-20 bg-green-700 [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#047857_100%)]">
+
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="p-8 md:p-10 rounded-xl">
             <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-4">Ready to Grow Your Farming Business?</h2>
@@ -125,7 +126,7 @@ const BecomeSeller = () => {
             </p>
             <div className="flex justify-center">
               <Link href="/register">
-                <button className="bg-green-700 hover:bg-green-800 text-white font-semibold py-3 px-10 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
+                <button className="bg-yellow-400 hover:bg-yellow-300 text-green-900  font-semibold py-3 px-10 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
                   Start Selling Today
                 </button>
               </Link>

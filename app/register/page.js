@@ -25,25 +25,29 @@ const Register = () => {
     if (step === 1) {
       setStep(2);
     } else if (step === 2) {
-      setStep(3);
-    } else {
-      const response = await fetch('/api/sellers', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        alert(result.message || 'Something went wrong');
-        return;
+      try { 
+        
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+  
+        const result = await response.json();
+  
+        if (!response.ok) {
+          alert(result.message || 'Something went wrong');
+          return;
+        }
+  
+        setStep(3);
+      } catch (err) {
+        console.error('Registration error:', err);
+        alert('Registration failed');
       }
-
-      router.push('/seller-dashboard');
     }
-
   };
+  
 
   return (
     <div className="min-h-80 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] py-10 px-4 flex flex-col items-center">
