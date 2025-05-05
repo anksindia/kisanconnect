@@ -9,7 +9,7 @@ const BecomeSeller = () => {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative bg-cover bg-center h-[80vh] text-white py-32" style={{ backgroundImage: "url('/img.webp')" }}>
-        
+      <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
           <div className="max-w-xl z-10">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">Start Selling on KisanConnect</h1>
