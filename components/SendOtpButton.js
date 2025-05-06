@@ -23,7 +23,7 @@ const SendOtpButton = ({ phone }) => {
       const result = await res.json();
 
       if (res.ok) {
-        toast.success(result.message || 'OTP sent successfully!');
+        toast.success('OTP sent! Use 123456 for demo.');
       } else {
         toast.error(result.message || 'Failed to send OTP.');
       }
@@ -40,7 +40,8 @@ const SendOtpButton = ({ phone }) => {
       <button
         type="button"
         onClick={handleSendOtp}
-        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm whitespace-nowrap"
+        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
+        disabled={loading}
       >
         {loading ? "Sending..." : "Send OTP"}
       </button>
