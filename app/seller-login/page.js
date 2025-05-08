@@ -8,6 +8,7 @@ const SellerLogin = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [showPassword, setShowPassword] = useState(false); 
   const router = useRouter();
 
   const onSubmit = async (data) => {
@@ -63,18 +64,27 @@ const SellerLogin = () => {
             {errors.phone && <p className="mt-2 text-sm text-red-600">{errors.phone.message}</p>}
           </div>
 
-          {/* Password */}
+          {/* Password with Show/Hide */}
           <div className="mb-6">
             <label className="block mb-1 font-medium">Password</label>
-            <input
-              type="password"
-              {...register('password', {
-                required: 'Password is required',
-              })}
-              className={`w-full rounded px-4 py-2 block text-sm border 
-                ${errors.password ? 'bg-red-50 border-red-500 text-red-900 placeholder-red-700' : 'focus:border-green-500'}`}
-              placeholder="Enter your password"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                {...register('password', {
+                  required: 'Password is required',
+                })}
+                className={`w-full rounded px-4 py-2 block text-sm border 
+                  ${errors.password ? 'bg-red-50 border-red-500 text-red-900 placeholder-red-700' : 'focus:border-green-500'}`}
+                placeholder="Enter your password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-2 text-sm text-gray-500"
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
             {errors.password && <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>}
           </div>
 
