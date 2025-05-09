@@ -9,6 +9,7 @@ const SellerDashboard = () => {
     <Navbar/>
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
+      
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Welcome Back, Seller 👋</h1>
         <p className="text-gray-500 mt-1">Here's what's happening with your store today.</p>
