@@ -8,7 +8,7 @@ const SellerLogin = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   const onSubmit = async (data) => {
@@ -27,8 +27,11 @@ const SellerLogin = () => {
       if (!response.ok) {
         setErrorMsg(result.message || 'Invalid credentials');
       } else {
+        // Save phone to localStorage for dashboard use
+        localStorage.setItem('sellerPhone', data.phone);
         router.push('/seller-dashboard');
       }
+
     } catch (error) {
       setErrorMsg('Something went wrong. Please try again.');
     } finally {
