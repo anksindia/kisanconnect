@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import Navbar from '@/components/Navbar';
 
 const SellerLogin = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -39,8 +40,9 @@ const SellerLogin = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-10 px-4">
+  return (<>
+    <Navbar/>
+    <div className="min-h-80 w-full bg-gradient-to-r from-white to-green-50 bg-[size:6rem_4rem] py-10 px-4 flex flex-col items-center">
       <div className="max-w-md w-full bg-white shadow-md rounded-lg p-8">
         <h2 className="text-2xl font-semibold mb-6 text-center text-green-700">Seller Login</h2>
 
@@ -111,6 +113,7 @@ const SellerLogin = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import Stepper from '@/components/Stepper';
 import { useRouter } from 'next/navigation';
 import SendOtpButton from '@/components/SendOtpButton';
+import Navbar from '@/components/Navbar';
 
 
 const Register = () => {
@@ -75,6 +76,8 @@ const Register = () => {
 
 
   return (
+    <>
+    <Navbar/>
     <div className="min-h-80 w-full bg-gradient-to-r from-white to-green-50 bg-[size:6rem_4rem] py-10 px-4 flex flex-col items-center">
 
       <Stepper step={step} />
@@ -373,6 +376,7 @@ const Register = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
