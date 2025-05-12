@@ -44,7 +44,7 @@ const SellerLogin = () => {
     <Navbar/>
     <div className="min-h-80 w-full bg-gradient-to-r from-white to-green-50 bg-[size:6rem_4rem] py-10 px-4 flex flex-col items-center">
       <div className="max-w-md w-full bg-white shadow-md rounded-lg p-8">
-        <h2 className="text-2xl font-semibold mb-6 text-center text-green-700">Seller Login</h2>
+        <h2 className="text-2xl font-semibold mb-6 text-center text-green-700">Login</h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
 
