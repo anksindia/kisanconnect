@@ -1,13 +1,22 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
+import Image from 'next/image'
 
 
 const page = () => {
   return (
     <>
       <Navbar />
-      <div className="relative bg-[url('/img2.webp')] bg-cover bg-center h-[89vh] flex flex-col items-center justify-center">
+      <div className="relative h-[89vh] flex flex-col items-center justify-center overflow-hidden">
+  <Image
+    src="/img2.webp"
+    alt="Background"
+    fill
+    priority
+    className="object-cover object-center -z-10"
+  />
+
         {/* Overlay */}
         <div className="absolute inset-0 bg-black opacity-20"></div>
 

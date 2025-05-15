@@ -8,18 +8,37 @@ const BecomeSeller = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-cover bg-center h-[80vh] text-white py-32" style={{ backgroundImage: "url('/img.webp')" }}>
-      <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
-          <div className="max-w-xl z-10">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">Start Selling on KisanConnect</h1>
-            <p className="text-lg mb-8 text-gray-200">Connect directly with buyers, grow your farm business, and make profits without middlemen!</p>
-            <Link href="/register">
-              <button className="bg-yellow-400 hover:bg-yellow-300 text-green-900 font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105">Start Selling</button>
-            </Link>
-          </div>
+       <section className="relative h-[80vh] text-white py-32 overflow-hidden">
+      {/* Optimized Background Image */}
+      <Image
+        src="/img.webp"
+        alt="Hero Background"
+        fill
+        priority
+        className="object-cover object-center -z-10"
+      />
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black opacity-20 z-0" />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
+        <div className="max-w-xl">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            Start Selling on KisanConnect
+          </h1>
+          <p className="text-lg mb-8 text-gray-200">
+            Connect directly with buyers, grow your farm business, and make
+            profits without middlemen!
+          </p>
+          <Link href="/register">
+            <button className="bg-yellow-400 hover:bg-yellow-300 text-green-900 font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105">
+              Start Selling
+            </button>
+          </Link>
         </div>
-      </section>
+      </div>
+    </section>
 
 
       {/* Steps Section */}

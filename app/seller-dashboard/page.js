@@ -11,33 +11,42 @@ const SellerDashboard = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('Pending');
 
-  useEffect(() => {
-    const phone = localStorage.getItem('sellerPhone');
+useEffect(() => {
+  const phone = sessionStorage.getItem('phone');
+  const sessionKey = sessionStorage.getItem('sessionKey');
 
-    if (!phone) {
-      console.error('No seller phone found in localStorage');
-      return;
-    }
+  if (!phone || !sessionKey) {
+    console.warn('Missing session data. Redirecting to login.');
+    router.push('/seller-login');
+    return;
+  }
 
-    const fetchSeller = async () => {
-      try {
-        const res = await fetch(`/api/seller-dashboard/data?phone=${phone}`);
-        const result = await res.json();
+  const fetchSeller = async () => {
+    try {
+      const res = await fetch(`/api/seller-dashboard/data?phone=${phone}`, {
+        headers: {
+          Authorization: `Bearer ${sessionKey}`,
+        },
+      });
+      const result = await res.json();
 
-        if (result.success) {
-          setSeller(result.data);
-        } else {
-          console.error('Failed to load seller:', result.message);
-        }
-      } catch (error) {
-        console.error('Fetch error:', error);
-      } finally {
-        setLoading(false);
+      if (result.success) {
+        setSeller(result.data);
+      } else {
+        console.error('Failed to load seller:', result.message);
+        router.push('/seller-login'); // Optional fallback
       }
-    };
+    } catch (error) {
+      console.error('Fetch error:', error);
+      router.push('/seller-login'); // Optional fallback
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchSeller();
-  }, []);
+  fetchSeller();
+}, []);
+
 
   if (loading) {
     return <div className="p-6 text-gray-600">Loading dashboard...</div>;
@@ -56,11 +65,6 @@ const SellerDashboard = () => {
 
 
         </div>
-
-
-
-
-
 
         {/* Order Summary Section */}
         <div className="bg-white p-6 rounded-xl shadow-sm mb-10">

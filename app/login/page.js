@@ -7,7 +7,7 @@ const Login = () => {
   return (
     <>
       <Navbar1st />
-      <div className="flex items-start justify-center min-h-80 py-10 bg-gradient-to-br from-gray-100 to-gray-200 px-4">
+      <div className="min-h-80 w-full bg-gradient-to-r from-white to-green-50 bg-[size:6rem_4rem] py-10 px-4 flex flex-col items-center">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800">Welcome</h2>
