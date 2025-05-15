@@ -1,4 +1,6 @@
+// app/api/register/route.js
 import clientPromise from "@/lib/mongodb";
+import bcrypt from "bcryptjs"; // <-- Add this
 
 export async function POST(request) {
   const body = await request.json();
@@ -19,6 +21,10 @@ export async function POST(request) {
       error: true,
     }, { status: 409 }); // 409 = Conflict
   }
+
+  // ✅ Hash the password before saving
+  const hashedPassword = await bcrypt.hash(body.password, 10);
+  body.password = hashedPassword;
 
   const result = await collection.insertOne(body);
 
