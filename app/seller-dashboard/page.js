@@ -11,41 +11,41 @@ const SellerDashboard = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('Pending');
 
-useEffect(() => {
-  const phone = sessionStorage.getItem('phone');
-  const sessionKey = sessionStorage.getItem('sessionKey');
+  useEffect(() => {
+    const phone = sessionStorage.getItem('phone');
+    const sessionKey = sessionStorage.getItem('sessionKey');
 
-  if (!phone || !sessionKey) {
-    console.warn('Missing session data. Redirecting to login.');
-    router.push('/seller-login');
-    return;
-  }
-
-  const fetchSeller = async () => {
-    try {
-      const res = await fetch(`/api/seller-dashboard/data?phone=${phone}`, {
-        headers: {
-          Authorization: `Bearer ${sessionKey}`,
-        },
-      });
-      const result = await res.json();
-
-      if (result.success) {
-        setSeller(result.data);
-      } else {
-        console.error('Failed to load seller:', result.message);
-        router.push('/seller-login'); // Optional fallback
-      }
-    } catch (error) {
-      console.error('Fetch error:', error);
-      router.push('/seller-login'); // Optional fallback
-    } finally {
-      setLoading(false);
+    if (!phone || !sessionKey) {
+      console.warn('Missing session data. Redirecting to login.');
+      router.push('/seller-login');
+      return;
     }
-  };
 
-  fetchSeller();
-}, []);
+    const fetchSeller = async () => {
+      try {
+        const res = await fetch(`/api/seller-dashboard/data?phone=${phone}`, {
+          headers: {
+            Authorization: `Bearer ${sessionKey}`,
+          },
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          setSeller(result.data);
+        } else {
+          console.error('Failed to load seller:', result.message);
+          router.push('/seller-login'); // Optional fallback
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        router.push('/seller-login'); // Optional fallback
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSeller();
+  }, []);
 
 
   if (loading) {
@@ -138,16 +138,17 @@ useEffect(() => {
             <p className="text-gray-500 text-sm">You haven’t listed any products yet.</p>
           )}
           {/* Add Product button */}
-        <div className="mt-4 sm:mt-0">
-          <Button
-            onClick={() => router.push('/seller-dashboard/add-product')}
-            button="+ Add Product"
-          />
-        </div>
+          <div className="mt-4 sm:mt-0">
+            <button
+              onClick={() => router.push('/seller-dashboard/add-product')}
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >
+              + Add Product
+            </button>
+
+          </div>
         </div>
 
-
-        
 
         {/* Tabbed Orders Section */}
         <div className="bg-white p-6 rounded-xl shadow-sm mb-10">
@@ -159,8 +160,8 @@ useEffect(() => {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition ${activeTab === tab
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-yellow-400 text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
               >
                 {tab}
@@ -184,7 +185,7 @@ useEffect(() => {
                     <p><span className="font-medium">Price:</span> ₹{order.price}</p>
                     <p><span className="font-medium">Status:</span>
                       <span className={`ml-1 px-2 py-0.5 rounded-full text-xs font-semibold ${order.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' :
-                          order.status === 'Delivered' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
+                        order.status === 'Delivered' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
                         }`}>
                         {order.status}
                       </span>
