@@ -21,37 +21,42 @@ const AddProduct = () => {
     }
   }, []);
 
-  const onSubmit = async (data) => {
-    setLoading(true);
-    setErrorMsg('');
-    setSuccessMsg('');
+ const onSubmit = async (data) => {
+  setLoading(true);
+  setErrorMsg('');
+  setSuccessMsg('');
 
-    const phone = sessionStorage.getItem('phone');
-    const sessionKey = sessionStorage.getItem('sessionKey');
+  const phone = sessionStorage.getItem('phone');
+  const sessionKey = sessionStorage.getItem('sessionKey');
 
-    try {
-      const res = await fetch('/api/seller-dashboard/add-product', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${sessionKey}`,
-        },
-        body: JSON.stringify({ ...data, phone }),
-      });
+  try {
+    const res = await fetch('/api/seller-dashboard/add-product', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionKey}`,
+      },
+      body: JSON.stringify({ ...data, phone }),
+    });
 
-      const result = await res.json();
+    const result = await res.json();
 
-      if (!res.ok) {
-        setErrorMsg(result.message || 'Failed to add product');
-      } else {
-        setSuccessMsg('Product added successfully!');
-      }
-    } catch (error) {
-      setErrorMsg('Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
+    if (!res.ok) {
+      setErrorMsg(result.message || 'Failed to add product');
+    } else {
+      setSuccessMsg('Product added successfully!');
+      
+      setTimeout(() => {
+        router.push('/seller-dashboard');
+      }, 1000);
     }
-  };
+  } catch (error) {
+    setErrorMsg('Something went wrong. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <>
@@ -62,6 +67,7 @@ const AddProduct = () => {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
+            {/* Product Name */}
             <div>
               <label className="block font-medium">Product Name</label>
               <input
@@ -72,6 +78,18 @@ const AddProduct = () => {
               {errors.name && <p className="text-sm text-red-600">{errors.name.message}</p>}
             </div>
 
+            {/* Image URL */}
+            <div>
+              <label className="block font-medium">Product Image URL</label>
+              <input
+                {...register('imageUrl', { required: 'Image URL is required' })}
+                className={`w-full px-4 py-2 border rounded ${errors.imageUrl ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
+                placeholder="Enter image URL"
+              />
+              {errors.imageUrl && <p className="text-sm text-red-600">{errors.imageUrl.message}</p>}
+            </div>
+
+            {/* Description */}
             <div>
               <label className="block font-medium">Description</label>
               <textarea
@@ -81,17 +99,19 @@ const AddProduct = () => {
               />
             </div>
 
+            {/* Price */}
             <div>
-              <label className="block font-medium">Price (₹)</label>
+              <label className="block font-medium">Price (₹ per kg)</label>
               <input
                 type="number"
                 {...register('price', { required: 'Price is required', min: 1 })}
                 className={`w-full px-4 py-2 border rounded ${errors.price ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
-                placeholder="Enter price"
+                placeholder="Enter price per kg"
               />
               {errors.price && <p className="text-sm text-red-600">{errors.price.message}</p>}
             </div>
 
+            {/* Stock */}
             <div>
               <label className="block font-medium">Stock</label>
               <input
@@ -103,19 +123,82 @@ const AddProduct = () => {
               {errors.stock && <p className="text-sm text-red-600">{errors.stock.message}</p>}
             </div>
 
+            {/* Category */}
             <div>
               <label className="block font-medium">Category</label>
               <input
                 {...register('category', { required: 'Category is required' })}
                 className={`w-full px-4 py-2 border rounded ${errors.category ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
-                placeholder="Enter product category"
+                placeholder="e.g., Fresh Vegetables"
               />
               {errors.category && <p className="text-sm text-red-600">{errors.category.message}</p>}
             </div>
 
+            {/* Origin */}
+            <div>
+              <label className="block font-medium">Origin</label>
+              <input
+                {...register('origin')}
+                className="w-full px-4 py-2 border border-gray-300 rounded"
+                placeholder="e.g., Locally grown in Punjab, India"
+              />
+            </div>
+
+            {/* Harvested On */}
+            <div>
+              <label className="block font-medium">Harvested On</label>
+              <input
+                type="date"
+                {...register('harvestedOn')}
+                className="w-full px-4 py-2 border border-gray-300 rounded"
+              />
+            </div>
+
+            {/* Shelf Life */}
+            <div>
+              <label className="block font-medium">Shelf Life</label>
+              <input
+                {...register('shelfLife')}
+                className="w-full px-4 py-2 border border-gray-300 rounded"
+                placeholder="e.g., Up to 7 days if refrigerated"
+              />
+            </div>
+
+            {/* Storage Tip */}
+            <div>
+              <label className="block font-medium">Storage Tip</label>
+              <input
+                {...register('storageTip')}
+                className="w-full px-4 py-2 border border-gray-300 rounded"
+                placeholder="e.g., Store in a cool, dry place"
+              />
+            </div>
+
+            {/* Usage */}
+            <div>
+              <label className="block font-medium">Usage</label>
+              <textarea
+                {...register('usage')}
+                className="w-full px-4 py-2 border border-gray-300 rounded"
+                placeholder="e.g., Ideal for cooking, salads, or juicing"
+              />
+            </div>
+
+            {/* Health Benefits */}
+            <div>
+              <label className="block font-medium">Health Benefits</label>
+              <textarea
+                {...register('healthBenefits')}
+                className="w-full px-4 py-2 border border-gray-300 rounded"
+                placeholder="e.g., Rich in fiber, antioxidants, and essential vitamins"
+              />
+            </div>
+
+            {/* Error & Success Messages */}
             {errorMsg && <p className="text-center text-sm text-red-600">{errorMsg}</p>}
             {successMsg && <p className="text-center text-sm text-green-600">{successMsg}</p>}
 
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
@@ -126,6 +209,7 @@ const AddProduct = () => {
           </form>
         </div>
       </div>
+
     </>
   );
 };
