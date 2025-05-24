@@ -6,8 +6,8 @@ export async function POST(req) {
     const client = await clientPromise;
     const db = client.db('kisanconnect');
     const sellers = db.collection('sellers');
-    const products = db.collection('products');
 
+    // 🔒 Extract token & body
     const authHeader = req.headers.get('authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return NextResponse.json({ success: false, message: 'Unauthorized: Missing token' }, { status: 401 });
@@ -15,34 +15,49 @@ export async function POST(req) {
 
     const sessionKey = authHeader.split(' ')[1];
     const body = await req.json();
-    const { phone, name, description, price, stock, category } = body;
+    const { phone, name, imageUrl, description, price, stock, category, origin, harvestedOn, shelfLife, storageTip, usage, healthBenefits } = body;
 
-    if (!phone || !sessionKey) {
-      return NextResponse.json({ success: false, message: 'Unauthorized: Missing credentials' }, { status: 401 });
+    // ✅ Validate required values
+    if (!phone || !sessionKey || !name || !price || !stock || !category || !imageUrl) {
+      return NextResponse.json({ success: false, message: 'Missing required fields' }, { status: 400 });
     }
 
-    // 🔒 Validate session
+    // ✅ Validate seller exists
     const seller = await sellers.findOne({ phone, sessionKey });
     if (!seller) {
       return NextResponse.json({ success: false, message: 'Unauthorized or session expired' }, { status: 403 });
     }
 
-    // ✅ Basic validation
-    if (!name || !price || !stock || !category) {
-      return NextResponse.json({ success: false, message: 'Missing product details' }, { status: 400 });
-    }
-
+    // 📦 Construct product object
     const product = {
-      sellerPhone: phone,
       name,
+      imageUrl,
       description: description || '',
       price: parseFloat(price),
       stock: parseInt(stock),
       category,
-      createdAt: new Date(),
+      origin: origin || '',
+      harvestedOn: harvestedOn ? new Date(harvestedOn) : null,
+      shelfLife: shelfLife || '',
+      storageTip: storageTip || '',
+      usage: usage || '',
+      healthBenefits: healthBenefits || '',
+      createdAt: new Date()
     };
 
-    await products.insertOne(product);
+    // 💾 Push into seller's products array
+    const result = await sellers.updateOne(
+      { phone, sessionKey },
+      { $push: { products: product } },
+      { upsert: false }
+    );
+
+
+
+
+    if (result.modifiedCount === 0) {
+      return NextResponse.json({ success: false, message: 'Product not added to seller' }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true, message: 'Product added successfully' });
 

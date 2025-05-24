@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import { useRouter } from 'next/navigation';
-import Button from '@/components/Button';
+
 
 const SellerDashboard = () => {
   const [seller, setSeller] = useState(null);
@@ -11,41 +11,44 @@ const SellerDashboard = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('Pending');
 
-  useEffect(() => {
-    const phone = sessionStorage.getItem('phone');
-    const sessionKey = sessionStorage.getItem('sessionKey');
 
-    if (!phone || !sessionKey) {
-      console.warn('Missing session data. Redirecting to login.');
-      router.push('/seller-login');
-      return;
-    }
 
-    const fetchSeller = async () => {
-      try {
-        const res = await fetch(`/api/seller-dashboard/data?phone=${phone}`, {
-          headers: {
-            Authorization: `Bearer ${sessionKey}`,
-          },
-        });
-        const result = await res.json();
+ useEffect(() => {
+  const phone = sessionStorage.getItem('phone');
+  const sessionKey = sessionStorage.getItem('sessionKey');
 
-        if (result.success) {
-          setSeller(result.data);
-        } else {
-          console.error('Failed to load seller:', result.message);
-          router.push('/seller-login'); // Optional fallback
-        }
-      } catch (error) {
-        console.error('Fetch error:', error);
-        router.push('/seller-login'); // Optional fallback
-      } finally {
-        setLoading(false);
+  if (!phone || !sessionKey) {
+    router.push('/seller-login');
+    return;
+  }
+
+  const fetchData = async () => {
+    try {
+      // 1. Fetch seller info
+      const sellerRes = await fetch(`/api/seller-dashboard/data?phone=${phone}`, {
+        headers: { Authorization: `Bearer ${sessionKey}` },
+      });
+      const sellerResult = await sellerRes.json();
+
+      if (sellerResult.success) {
+        setSeller(sellerResult.data);
+      } else {
+        router.push('/seller-login');
       }
-    };
 
-    fetchSeller();
-  }, []);
+    
+    } catch (err) {
+      console.error('Dashboard Fetch Error:', err);
+      router.push('/seller-login');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, []);
+
+
 
 
   if (loading) {
@@ -116,32 +119,75 @@ const SellerDashboard = () => {
           </div>
         </div>
 
-        {/* Listed Products Section */}
-        <div className="bg-white p-6 rounded-xl shadow-sm mb-10">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Products</h2>
+       {/* Listed Products Section */}
+<div className="bg-white p-6 rounded-xl shadow-sm mb-10">
+  <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Products</h2>
 
-          {seller?.products?.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {seller.products.map((product, index) => (
-                <div key={index} className="border rounded-lg p-4 bg-gray-50">
-                  <h3 className="text-lg font-semibold text-gray-700">{product.name}</h3>
-                  <p className="text-sm text-gray-500 mt-1">{product.description}</p>
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p><span className="font-medium">Price:</span> ₹{product.price}</p>
-                    <p><span className="font-medium">Stock:</span> {product.stock}</p>
-                    <p><span className="font-medium">Category:</span> {product.category}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-500 text-sm">You haven’t listed any products yet.</p>
-          )}
+  {seller?.products?.length > 0 ? (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {seller.products.map((product, index) => (
+        <div key={index} className="border rounded-lg p-4 bg-gray-50 relative">
+          {/* Product Image */}
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="w-full h-40 object-cover rounded mb-3"
+          />
+
+          {/* Product Info */}
+          <h3 className="text-lg font-semibold text-gray-700">{product.name}</h3>
+          <p className="text-sm text-gray-500 mt-1">{product.description}</p>
+          <div className="mt-2 text-sm text-gray-600 space-y-1">
+            <p><span className="font-medium">Price:</span> ₹{product.price}</p>
+            <p><span className="font-medium">Stock:</span> {product.stock}</p>
+            <p><span className="font-medium">Category:</span> {product.category}</p>
+          </div>
+
+          {/* Delete Button */}
+          <button
+            onClick={async () => {
+              const confirm = window.confirm(`Delete ${product.name}?`);
+              if (!confirm) return;
+
+              const phone = sessionStorage.getItem('phone');
+              const sessionKey = sessionStorage.getItem('sessionKey');
+
+              const res = await fetch('/api/seller-dashboard/delete-product', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${sessionKey}`,
+                },
+                body: JSON.stringify({
+                  phone,
+                  productName: product.name,
+                }),
+              });
+
+              const result = await res.json();
+              if (result.success) {
+                window.location.reload(); // or update state to remove product
+              } else {
+                alert(result.message || 'Failed to delete');
+              }
+            }}
+            className="absolute top-3 right-3 bg-red-100 hover:bg-red-200 text-red-700 text-xs font-medium px-2 py-1 rounded"
+          >
+            Delete
+          </button>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="text-gray-500 text-sm">You haven’t listed any products yet.</p>
+  )}
+</div>
+
           {/* Add Product button */}
           <div className="mt-4 sm:mt-0">
             <button
               onClick={() => router.push('/seller-dashboard/add-product')}
-              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+              className="bg-green-600 mt-2 text-white px-4 py-2 rounded hover:bg-green-700"
             >
               + Add Product
             </button>
@@ -203,9 +249,6 @@ const SellerDashboard = () => {
             )}
         </div>
 
-
-
-      </div>
     </>
   );
 };
