@@ -42,6 +42,7 @@ const Marketplace = () => {
           products.map((product, idx) => <Details key={idx} product={product} />)
         )}
       </div>
+      
     </>
   );
 };
