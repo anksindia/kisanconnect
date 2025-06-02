@@ -7,8 +7,9 @@ export async function GET() {
 
     const sellers = await db.collection("sellers").find({}).toArray();
 
-    // Extract all products from all sellers with seller name
+    // Extract all products safely
     const allProducts = sellers.flatMap((seller) => {
+      if (!Array.isArray(seller.products)) return []; // guard clause
       return seller.products.map((product) => ({
         name: product.name,
         imageUrl: product.imageUrl,

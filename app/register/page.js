@@ -366,7 +366,7 @@ const Register = () => {
                   onClick={() => router.push('/seller-dashboard')}
                   className="mt-6 bg-yellow-400 hover:bg-yellow-300 text-green-900 py-3 px-6 rounded-lg font-semibold"
                 >
-                  Go to Dashboard
+                  Login to your Account
                 </button>
               </div>
             </>
