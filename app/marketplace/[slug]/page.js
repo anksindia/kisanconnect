@@ -23,16 +23,22 @@ async function getProductData(slug) {
       (p) => p.name.toLowerCase().replace(/\s+/g, '-') === slug
     );
 
-    return matchedProduct || null;
+    // Remove matched product and shuffle the rest for random selection
+    const filteredProducts = allProducts.filter(p => p !== matchedProduct);
+    const shuffled = filteredProducts.sort(() => 0.5 - Math.random());
+    const randomProducts = shuffled.slice(0, 5);
+
+    return { matchedProduct, randomProducts };
   } catch (error) {
     console.error("Error fetching product:", error);
-    return null;
+    return { matchedProduct: null, randomProducts: [] };
   }
 }
 
+
 const Produce = async ({ params }) => {
   const { slug } = await params;
-  const product = await getProductData(slug);
+  const { matchedProduct: product, randomProducts } = await getProductData(slug);
 
   if (!product) {
     return (
@@ -41,7 +47,6 @@ const Produce = async ({ params }) => {
       </div>
     );
   }
-
   return (
     <>
       <Navbar />
@@ -104,15 +109,16 @@ const Produce = async ({ params }) => {
         </ul>
       </div>
 
+     
       <div className="max-w-6xl mx-auto mt-12 px-4 py-6">
         <h2 className="text-2xl font-semibold text-green-800 mb-6">
           Customers who bought this item also bought
         </h2>
 
-        <div className="flex overflow-x-auto scrollbar-hide">
-          {[...Array(5)].map((_, i) => (
+        <div className="flex overflow-x-auto scrollbar-hide gap-4">
+          {randomProducts.map((prod, i) => (
             <div className="flex-shrink-0 w-60" key={i}>
-              <Details product={product} />
+              <Details product={prod} />
             </div>
           ))}
         </div>

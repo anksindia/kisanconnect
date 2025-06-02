@@ -33,7 +33,7 @@ const Details = ({ product }) => {
           <div className="text-gray-600">
             Farmer:{" "}
             <span className="text-gray-700 font-medium">
-              {product.seller || "Unknown"}
+              {product?.sellerName ?? product?.seller ?? "Unknown"}
             </span>
           </div>
           <div className="text-gray-600">

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import { FaXTwitter } from 'react-icons/fa6';
-import { Mail, MapPin, Phone, Github, Instagram } from 'lucide-react';
+
+import { Mail, MapPin, Phone, Github } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -32,10 +32,10 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-3">Contact Us</h3>
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-2">
-              <Mail size={16} /> support@kisanconnect.app
+              <Mail size={16} /> ankitsuyal.in@gmail.com
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={16} /> +91 98765 43210
+              <Phone size={16} /> +91 81713 98763
             </li>
             <li className="flex items-center gap-2">
               <MapPin size={16} /> Uttarakhand, India
@@ -43,16 +43,22 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Social Media */}
+        {/* Open Source Presence */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
-          <div className="flex gap-4 mt-2">
-            <Github className="hover:text-amber-300 cursor-pointer" />
-            <Instagram className="hover:text-amber-300 cursor-pointer" />
-            <FaXTwitter className="hover:text-amber-300 cursor-pointer" />
+          <h3 className="text-lg font-semibold mb-3">Open Source Presence</h3>
+          <div className="flex items-center gap-4 mt-2">
+            <a
+              href="https://github.com/anksindia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-amber-300 transition-colors duration-200"
+              aria-label="GitHub - Ankit Suyal"
+            >
+              <Github size={22} />
+            </a>
           </div>
         </div>
-      </div> 
+      </div>
 
       <hr className="my-6 border-white/20" />
 
