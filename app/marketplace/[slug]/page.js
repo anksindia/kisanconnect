@@ -103,6 +103,7 @@ const Produce = async ({ params }) => {
           </li>
 
           <li><strong>Shelf Life:</strong> {product.shelfLife}</li>
+          <li><strong>Stock:</strong> {product.stock} kg</li>
           <li><strong>Storage Tip:</strong> {product.storageTip}</li>
           <li><strong>Usage:</strong> {product.usage}</li>
           <li><strong>Health Benefits:</strong> {product.healthBenefits}</li>

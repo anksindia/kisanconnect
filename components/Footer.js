@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 
 import { Mail, MapPin, Phone, Github } from 'lucide-react';
 
@@ -17,15 +18,27 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
-        <div>
-          <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-sm">
-            <li className="hover:text-amber-300 cursor-pointer">Home</li>
-            <li className="hover:text-amber-300 cursor-pointer">Explore</li>
-            <li className="hover:text-amber-300 cursor-pointer">Sell Produce</li>
-            <li className="hover:text-amber-300 cursor-pointer">FAQs</li>
-          </ul>
-        </div>
+
+<div>
+  <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
+  <ul className="space-y-2 text-sm">
+    <li>
+      <Link href="/" className="hover:text-amber-300 transition-colors duration-200 block">
+        Home
+      </Link>
+    </li>
+    <li>
+      <Link href="/marketplace" className="hover:text-amber-300 transition-colors duration-200 block">
+        Explore
+      </Link>
+    </li>
+    <li>
+      <Link href="/register" className="hover:text-amber-300 transition-colors duration-200 block">
+        Sell Produce
+      </Link>
+    </li>
+  </ul>
+</div>
 
         {/* Contact Info */}
         <div>
