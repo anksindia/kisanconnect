@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
+import clientPromise from '@/lib/mongodb'; 
+import { slugify } from '@/app/utils/slugify';
 
 export async function POST(req) {
   try {
@@ -15,7 +16,21 @@ export async function POST(req) {
 
     const sessionKey = authHeader.split(' ')[1];
     const body = await req.json();
-    const { phone, name, imageUrl, description, price, stock, category, origin, harvestedOn, shelfLife, storageTip, usage, healthBenefits } = body;
+    const {
+      phone,
+      name,
+      imageUrl,
+      description,
+      price,
+      stock,
+      category,
+      origin,
+      harvestedOn,
+      shelfLife,
+      storageTip,
+      usage,
+      healthBenefits
+    } = body;
 
     // ✅ Validate required values
     if (!phone || !sessionKey || !name || !price || !stock || !category || !imageUrl) {
@@ -28,9 +43,13 @@ export async function POST(req) {
       return NextResponse.json({ success: false, message: 'Unauthorized or session expired' }, { status: 403 });
     }
 
+    // 🆕 Generate slug from product name
+    const slug = slugify(name);
+
     // 📦 Construct product object
     const product = {
       name,
+      slug, // ✅ Add slug here
       imageUrl,
       description: description || '',
       price: parseFloat(price),
@@ -51,9 +70,6 @@ export async function POST(req) {
       { $push: { products: product } },
       { upsert: false }
     );
-
-
-
 
     if (result.modifiedCount === 0) {
       return NextResponse.json({ success: false, message: 'Product not added to seller' }, { status: 500 });
