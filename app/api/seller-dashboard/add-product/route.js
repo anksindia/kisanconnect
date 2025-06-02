@@ -49,7 +49,7 @@ export async function POST(req) {
     // 📦 Construct product object
     const product = {
       name,
-      slug, // ✅ Add slug here
+      slug, 
       imageUrl,
       description: description || '',
       price: parseFloat(price),
@@ -64,7 +64,7 @@ export async function POST(req) {
       createdAt: new Date()
     };
 
-    // 💾 Push into seller's products array
+    //  Push into seller's products array
     const result = await sellers.updateOne(
       { phone, sessionKey },
       { $push: { products: product } },

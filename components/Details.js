@@ -39,7 +39,7 @@ const Details = ({ product }) => {
           <div className="text-gray-600">
             Quantity:{" "}
             <span className="text-gray-700">
-              {product.quantity || "1kg"}
+              {product.stock || "1kg"}
             </span>
           </div>
           <div className="text-green-700 font-semibold">
