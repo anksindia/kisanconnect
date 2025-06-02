@@ -7,15 +7,16 @@ export async function GET() {
 
     const sellers = await db.collection("sellers").find({}).toArray();
 
-    // Extract all products safely
+    // ✅ Safely handle cases where seller.products is missing or not an array
     const allProducts = sellers.flatMap((seller) => {
-      if (!Array.isArray(seller.products)) return []; // guard clause
+      if (!Array.isArray(seller.products)) return [];
       return seller.products.map((product) => ({
         name: product.name,
         imageUrl: product.imageUrl,
         price: product.price,
         quantity: "1kg",
         seller: seller.firstName,
+        slug: product.name.toLowerCase().replace(/\s+/g, "-"), // add slug if needed
       }));
     });
 

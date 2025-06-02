@@ -12,7 +12,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSellerLoggedIn, setIsSellerLoggedIn] = useState(false);
-  const [mounted, setMounted] = useState(false); // 🛠 Fix hydration
+  const [mounted, setMounted] = useState(false); 
 
   const { data: session } = useSession();
   const pathname = usePathname();
@@ -30,7 +30,7 @@ const Navbar = () => {
     }
   }, []);
 
-  if (!mounted) return null; // ⛔ Prevent hydration mismatch
+  if (!mounted) return null; 
 
   const isMarketplace = pathname === '/marketplace';
   const isSellerDashboard = pathname === '/seller-dashboard';
