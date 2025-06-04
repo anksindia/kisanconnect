@@ -32,7 +32,7 @@ const Navbar = () => {
 
   if (!mounted) return null; 
 
-  const isMarketplace = pathname === '/marketplace';
+  const isMarketplace = pathname.startsWith('/marketplace');
   const isSellerDashboard = pathname === '/seller-dashboard';
   const isSellerLoginOrRegister = ['/seller-login', '/register'].includes(pathname);
   const hideLoginButton = ['/login', '/BecomeSeller'].includes(pathname);
