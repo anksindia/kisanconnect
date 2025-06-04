@@ -11,18 +11,22 @@ export async function GET(request, { params }) {
 
     let matchedProduct = null;
 
+    const normalize = (str) =>
+      str.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
+
     for (const seller of sellers) {
-      const product = seller.products.find(
-        (p) => p.name.toLowerCase().replace(/\s+/g, "-") === slug
-      );
-      if (product) {
-        matchedProduct = {
-          ...product,
-          seller: seller.firstName,
-          sellerId: seller._id,
-        };
-        break;
+      for (const product of seller.products || []) {
+        const productSlug = normalize(product.name);
+        if (productSlug === slug) {
+          matchedProduct = {
+            ...product,
+            seller: seller.firstName,
+            sellerId: seller._id,
+          };
+          break;
+        }
       }
+      if (matchedProduct) break;
     }
 
     if (!matchedProduct) {

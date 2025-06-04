@@ -30,14 +30,18 @@ const AddProduct = () => {
     const sessionKey = sessionStorage.getItem('sessionKey');
 
     try {
-      const res = await fetch('/api/seller-dashboard/add-product', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${sessionKey}`,
-        },
-        body: JSON.stringify({ ...data, phone }),
-      });
+      // Create slug from product name
+const slug = data.name.toLowerCase().trim().replace(/\s+/g, '-');
+
+const res = await fetch('/api/seller-dashboard/add-product', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${sessionKey}`,
+  },
+  body: JSON.stringify({ ...data, phone, slug }),
+});
+
 
       const result = await res.json();
 
