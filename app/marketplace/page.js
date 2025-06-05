@@ -7,12 +7,25 @@ import SearchBar from '@/components/SearchBar';
 
 const Marketplace = () => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  const fetchProducts = async (filters = {}) => {
+    setIsLoading(true);
+    try {
+      const query = new URLSearchParams(filters).toString();
+      const res = await fetch(`/api/products?${query}`);
+      const data = await res.json();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // initial load
   useEffect(() => {
-    fetch('/api/products')
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error('Fetch error:', err));
+    fetchProducts();
   }, []);
 
   return (
@@ -30,19 +43,28 @@ const Marketplace = () => {
         </div>
       </div>
 
+      {/* Search */}
       <div className="relative z-30 overflow-visible">
-        <SearchBar />
+        <SearchBar setProducts={setProducts} />
       </div>
 
       {/* Products */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-3 gap-y-5 px-2 place-items-center max-w-6xl mx-auto my-5">
-        {products.length === 0 ? (
-          <p className="text-gray-600">No products found.</p>
+      <div className="min-h-[300px] flex justify-center items-center px-2 max-w-6xl mx-auto my-5">
+        {isLoading ? (
+          <div className="flex flex-col items-center space-y-4">
+            <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+            <p className="text-lg font-semibold text-gray-700 animate-bounce">Loading...</p>
+          </div>
+        ) : products.length === 0 ? (
+          <p className="text-gray-600 text-center">No products found.</p>
         ) : (
-          products.map((product, idx) => <Details key={idx} product={product} />)
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-3 gap-y-5 w-full place-items-center">
+            {products.map((product, idx) => (
+              <Details key={idx} product={product} />
+            ))}
+          </div>
         )}
       </div>
-      
     </>
   );
 };
