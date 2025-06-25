@@ -9,8 +9,17 @@ const generateSlug = (name) => {
   return name.toLowerCase().replace(/\s+/g, "-");
 };
 
-const Details = ({ product }) => {
+const Details = ({ product, onAddToCart }) => {
   const slug = generateSlug(product.name);
+
+  // Prevent card navigation when clicking the button
+  const handleAddToCartClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (onAddToCart) {
+      onAddToCart(product);
+    }
+  };
 
   return (
     <Link href={`/marketplace/${slug}`} className="block">
@@ -46,8 +55,10 @@ const Details = ({ product }) => {
             Price: ₹{product.price}
           </div>
 
-          {/* You can remove this button if you don’t want click conflict */}
-          <Button button="Add to cart" />
+          {/* Add to Cart Button (stops propagation) */}
+          <div onClick={handleAddToCartClick}>
+            <Button button="Add to cart" />
+          </div>
         </div>
       </div>
     </Link>
