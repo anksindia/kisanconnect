@@ -7,27 +7,30 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  // Unique cart key for matching products
+  // Generate a reliable cart key for matching
   const createCartKey = (product) => {
     return `${product._id}-${product.name}-${product.sellerName}`
       .toLowerCase()
       .replace(/\s+/g, '-');
   };
 
-  // Load from localStorage on mount
+  // Load cart from localStorage
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
       const parsed = JSON.parse(storedCart);
+
+      // Add cartKey if missing
       const updated = parsed.map((item) => ({
         ...item,
         cartKey: item.cartKey || createCartKey(item),
       }));
+
       setCartItems(updated);
     }
   }, []);
 
-  // Persist cart on change
+  // Save cart to localStorage
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems]);
@@ -64,9 +67,20 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem('cart'); // optional, clears storage too
+  };
+
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, updateQuantity }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>
