@@ -7,17 +7,20 @@ import { X, ShoppingCart, UserCircle } from 'lucide-react';
 import Button from './Button';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
+import { useCart } from '@/app/context/CartContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSellerLoggedIn, setIsSellerLoggedIn] = useState(false);
   const { data: session } = useSession();
+  const { cartItems } = useCart();
   const pathname = usePathname();
   const router = useRouter();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   // Seller logout handler
   const handleLogout = () => {
@@ -27,7 +30,6 @@ const Navbar = () => {
     router.push('/seller-login');
   };
 
-  // On mount check seller session
   useEffect(() => {
     const phone = sessionStorage.getItem('phone');
     const sessionKey = sessionStorage.getItem('sessionKey');
@@ -36,7 +38,6 @@ const Navbar = () => {
     }
   }, []);
 
-  // Buyer redirect to /marketplace if logged in and on login page
   useEffect(() => {
     if (session && pathname === '/login') {
       router.push('/marketplace');
@@ -67,8 +68,15 @@ const Navbar = () => {
           {/* Buyer options */}
           {session && !hideBuyerOptions && (
             <>
-              <li className="text-gray-700 hover:text-green-700 cursor-pointer">
-                <ShoppingCart size={22} />
+              <li className="relative text-gray-700 hover:text-green-700 cursor-pointer">
+                <Link href="/cart">
+                  <ShoppingCart size={22} />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs px-1.5 rounded-full">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
               </li>
               <li className="relative text-gray-700 hover:text-green-700 cursor-pointer" onClick={toggleUserMenu}>
                 <UserCircle size={22} />
@@ -95,7 +103,7 @@ const Navbar = () => {
             </li>
           )}
 
-          {/* Continue as Seller (Only if not seller & not already on seller pages) */}
+          {/* Continue as Seller */}
           {!hideContinueAsSeller && (
             <Link href="/BecomeSeller">
               <li className="text-green-700 font-semibold hover:text-gray-700 cursor-pointer">
@@ -104,7 +112,7 @@ const Navbar = () => {
             </Link>
           )}
 
-          {/* Login Button (only if not logged in and not on login page) */}
+          {/* Login Button */}
           {!session && !isSellerLoggedIn && !hideLoginButton && (
             <li>
               <Link href="/login">
@@ -117,8 +125,13 @@ const Navbar = () => {
         {/* Mobile Icons */}
         <div className="flex items-center gap-4 md:hidden">
           {!hideBuyerOptions && (
-            <Link href="/cart">
+            <Link href="/cart" className="relative">
               <ShoppingCart size={24} className="text-gray-700 hover:text-green-700" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs px-1.5 rounded-full">
+                  {cartCount}
+                </span>
+              )}
             </Link>
           )}
           <div onClick={toggleMenu}>
