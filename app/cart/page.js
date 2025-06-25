@@ -3,7 +3,7 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import Navbar from '@/components/Navbar';
-import Button from '@/components/Button';
+import RazorpayCheckout from '@/components/RazorpayCheckout';
 import Link from 'next/link';
 
 const CartPage = () => {
@@ -77,7 +77,7 @@ const CartPage = () => {
                 Total: ₹{total.toFixed(2)}
               </p>
               <div className="mt-4">
-                <Button button="Place Order" />
+                <RazorpayCheckout amount={Math.round(total * 100)} />
               </div>
             </div>
           </div>

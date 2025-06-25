@@ -32,7 +32,7 @@ const ProductDetailsClient = ({ product, randomProducts }) => {
             </div>
 
             <div className="flex gap-2">
-              <Button button="Order Now" />
+              {/* <Button button="Order Now" /> */}
               <div onClick={() => addToCart(product)}>
                 <Button button="Add to cart" />
               </div>
@@ -83,4 +83,4 @@ const ProductDetailsClient = ({ product, randomProducts }) => {
   );
 };
 
-export default ProductDetailsClient;
+export default ProductDetailsClient; 

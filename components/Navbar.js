@@ -22,7 +22,6 @@ const Navbar = () => {
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
-  // Seller logout handler
   const handleLogout = () => {
     sessionStorage.removeItem('phone');
     sessionStorage.removeItem('sessionKey');
@@ -48,6 +47,10 @@ const Navbar = () => {
   const hideBuyerOptions = ['/login', '/', '/seller', '/BecomeSeller'].includes(pathname);
   const hideContinueAsSeller = isSellerLoggedIn || ['/seller', '/BecomeSeller'].includes(pathname);
 
+  // ✅ NEW: Show cart on specific pages even without session
+  const showCartIcon =
+    pathname.startsWith('/marketplace') || pathname === '/cart' || pathname === '/orders';
+
   return (
     <header className="shadow-md bg-white sticky top-0 z-50">
       <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
@@ -65,33 +68,36 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-6">
-          {/* Buyer options */}
-          {session && !hideBuyerOptions && (
-            <>
-              <li className="relative text-gray-700 hover:text-green-700 cursor-pointer">
-                <Link href="/cart">
-                  <ShoppingCart size={22} />
-                  {cartCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs px-1.5 rounded-full">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
-              </li>
-              <li className="relative text-gray-700 hover:text-green-700 cursor-pointer" onClick={toggleUserMenu}>
-                <UserCircle size={22} />
-                {isUserMenuOpen && (
-                  <ul className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-md py-2">
-                    <Link href="/BecomeSeller"><li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Account</li></Link>
-                    <Link href="/orders"><li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Orders</li></Link>
-                    <li onClick={() => signOut()} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Sign Out</li>
-                  </ul>
+          {/* Cart Icon */}
+          {showCartIcon && (
+            <li className="relative text-gray-700 hover:text-green-700 cursor-pointer">
+              <Link href="/cart">
+                <ShoppingCart size={22} />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs px-1.5 rounded-full">
+                    {cartCount}
+                  </span>
                 )}
-              </li>
-            </>
+              </Link>
+            </li>
           )}
 
-          {/* Seller Logout */}
+          {/* User menu */}
+          {session && !hideBuyerOptions && (
+            <li className="relative text-gray-700 hover:text-green-700 cursor-pointer" onClick={toggleUserMenu}>
+              <UserCircle size={22} />
+              {isUserMenuOpen && (
+                <ul className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-md py-2">
+                  <Link href="/orders">
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Orders</li>
+                  </Link>
+                  <li onClick={() => signOut()} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Sign Out</li>
+                </ul>
+              )}
+            </li>
+          )}
+
+          {/* Seller logout */}
           {isSellerLoggedIn && (
             <li>
               <button
@@ -112,7 +118,7 @@ const Navbar = () => {
             </Link>
           )}
 
-          {/* Login Button */}
+          {/* Login button */}
           {!session && !isSellerLoggedIn && !hideLoginButton && (
             <li>
               <Link href="/login">
@@ -122,9 +128,9 @@ const Navbar = () => {
           )}
         </ul>
 
-        {/* Mobile Icons */}
+        {/* Mobile Menu Icon */}
         <div className="flex items-center gap-4 md:hidden">
-          {!hideBuyerOptions && (
+          {showCartIcon && (
             <Link href="/cart" className="relative">
               <ShoppingCart size={24} className="text-gray-700 hover:text-green-700" />
               {cartCount > 0 && (
@@ -140,7 +146,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown */}
       {isOpen && (
         <div className="md:hidden px-6 pb-4">
           <ul className="flex flex-col gap-4">
@@ -153,8 +159,9 @@ const Navbar = () => {
             )}
             {!hideBuyerOptions && (
               <>
-                <Link href="/orders"><li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">Orders</li></Link>
-                <Link href="/BecomeSeller"><li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">Account</li></Link>
+                <Link href="/orders">
+                  <li className="text-gray-700 font-semibold hover:text-green-700 cursor-pointer">Orders</li>
+                </Link>
               </>
             )}
             {!session && !isSellerLoggedIn && !hideLoginButton && (
