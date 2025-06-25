@@ -42,7 +42,7 @@ The platform allows farmers to register, list their organic produce, and connect
 ## 🖼️ App Preview
 
 
- ![](/public/screenshot1.png) | ![](/public/screenshot2.png) | ![](/public/screenshot3.png) |
+ ![](/public/Screenshot1.png) | ![](/public/Screenshot2.png) | ![](/public/Screenshot3.png) |
 
 ---
 
